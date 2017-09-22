@@ -158,7 +158,7 @@ function testLianDui() {
 
 //测试飞机不带
 function testFeiJiBuDai() {
-    for (let i = 0; i < 1000000; i++) {
+    for (let i = 0; i < 10000; i++) {
         let pokers = generatePokers(5, 15);
         // let pokers = [{point:5},{point:5},{point:5},
         //     {point:6},{point:6},{point:6},
@@ -170,4 +170,20 @@ function testFeiJiBuDai() {
     }
 }
 
-testFeiJiBuDai();
+// testFeiJiBuDai();
+
+//测试 4带2
+function testSiDaiEr() {
+    for (let i = 0; i < 100000; i++) {
+        let pokers = generatePokers(6, 9);
+        // let pokers = [{point:5},{point:5},{point:5},
+        //     {point:6},{point:6},{point:6},
+        //     {point:4},{point:4},{point:4}];
+
+        if (landlord.isSiDaiEr(pokers)) {
+            printPokers(pokers, '4带2');
+        }
+    }
+}
+
+testSiDaiEr();
