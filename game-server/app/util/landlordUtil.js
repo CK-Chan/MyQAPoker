@@ -171,6 +171,37 @@ landlord.isLianDui = function (pokers) {
 };
 
 /**
+ * 是否 飞机不带
+ */
+landlord.isFeiJiBuDai = function (pokers) {
+    if (!pokers || !pokers.length || pokers.length < 6 || (pokers.length % 3 !== 0)) {
+        return false;
+    }
+
+    sortPokers(pokers);
+
+    // 排除 三个2
+    if (pokers[pokers.length - 1].point > 14) {
+        return false;
+    }
+
+    let result = true;
+    let selectPokers = [];
+
+    for (let i = 0; i < pokers.length - 2; i += 3) {
+        if (!isSamePoint(pokers.slice(i, i + 3))) {
+            result = false;
+            break;
+        }
+        selectPokers.push(pokers[i])
+    }
+    result = result && isContinuous(selectPokers);
+
+    return result;
+};
+
+
+/**
  * 整理牌组 , 从小到大
  * 目前只是按点数排序，没有加入花色判断
  *

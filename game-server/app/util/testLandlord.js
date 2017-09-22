@@ -154,4 +154,20 @@ function testLianDui() {
     }
 }
 
-testLianDui();
+// testLianDui();
+
+//测试飞机不带
+function testFeiJiBuDai() {
+    for (let i = 0; i < 1000000; i++) {
+        let pokers = generatePokers(5, 15);
+        // let pokers = [{point:5},{point:5},{point:5},
+        //     {point:6},{point:6},{point:6},
+        //     {point:4},{point:4},{point:4}];
+
+        if (landlord.isFeiJiBuDai(pokers)) {
+            printPokers(pokers, '飞机不带');
+        }
+    }
+}
+
+testFeiJiBuDai();
