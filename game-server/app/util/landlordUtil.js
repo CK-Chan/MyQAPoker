@@ -146,21 +146,26 @@ landlord.isLianDui = function (pokers) {
         return false;
     }
 
-    let result = true;
     sortPokers(pokers);
 
-    if(pokers[pokers.length -1].point > 14) {      // 排除 对2
+    // 排除 对2
+    if (pokers[pokers.length - 1].point > 14) {
         return false;
     }
 
+    let result = true;
+    let selectPokers = [];
+
     //第1和第2、第3和第4....点数相同 ； 第1和第3、第3和第5.... 点数相差1
     for (let i = 0; i < pokers.length - 1; i += 2) {
-        if ((pokers[i].point !== pokers[i + 1].point)
-            || ((i + 2 < pokers.length) && ((pokers[i + 2].point - pokers[i].point) !== 1 ))) {
+        if ((pokers[i].point !== pokers[i + 1].point)) {
             result = false;
             break;
         }
+        selectPokers.push(pokers[i])
     }
+
+    result = result && isContinuous(selectPokers);
 
     return result;
 };
