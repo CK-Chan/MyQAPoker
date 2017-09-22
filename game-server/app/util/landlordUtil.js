@@ -132,6 +132,13 @@ landlord.isZhaDan = function (pokers) {
 };
 
 /**
+ * 是否 王炸
+ */
+landlord.isDuiWang = function (pokers) {
+    return !!(pokers && pokers.length && pokers.length === 2 && (pokers[0].point + pokers[1].point === 33));
+};
+
+/**
  * 整理牌组 , 从小到大
  * 目前只是按点数排序，没有加入花色判断
  *

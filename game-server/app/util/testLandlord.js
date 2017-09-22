@@ -127,4 +127,17 @@ function testZhaDan() {
     }
 }
 
-testZhaDan();
+// testZhaDan();
+
+//测试王炸
+function testDuiWang() {
+    for (let i = 0; i < 1000; i++) {
+        let pokers = generatePokers(1, 4);
+
+        if (landlord.isDuiWang(pokers)) {
+            printPokers(pokers, '王炸');
+        }
+    }
+}
+
+testDuiWang();
