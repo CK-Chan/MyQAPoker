@@ -24,6 +24,7 @@ function generatePokers(min, max) {
 /**
  * 打印牌组
  * @param pokers
+ * @param describe {String} 牌组说明信息
  */
 function printPokers(pokers, describe) {
     let arr = [];
@@ -113,4 +114,17 @@ function testShunZi() {
     }
 }
 
-testShunZi();
+// testShunZi();
+
+//测试炸弹
+function testZhaDan() {
+    for (let i = 0; i < 10000; i++) {
+        let pokers = generatePokers(3, 5);
+
+        if (landlord.isZhaDan(pokers)) {
+            printPokers(pokers, '炸弹');
+        }
+    }
+}
+
+testZhaDan();

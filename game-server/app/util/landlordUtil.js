@@ -125,6 +125,13 @@ landlord.isShunZi = function (pokers) {
 };
 
 /**
+ * 是否 炸弹
+ */
+landlord.isZhaDan = function (pokers) {
+    return !!(pokers && pokers.length && pokers.length === 4 && isSamePoint(pokers));
+};
+
+/**
  * 整理牌组 , 从小到大
  * 目前只是按点数排序，没有加入花色判断
  *
