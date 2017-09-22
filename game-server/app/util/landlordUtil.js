@@ -104,13 +104,22 @@ landlord.isSanBuDai = function (pokers) {
  */
 landlord.isSanDaiYi = function (pokers) {
     // 排除炸弹
-    if (!pokers || !pokers.length || pokers.length !== 4 || isSamePoint(pokers)) {
+    if (!pokers || !pokers.length || (pokers.length !== 4 && pokers.length !== 5) || isSamePoint(pokers)) {
         return false;
     }
 
     sortPokers(pokers);
 
-    return isSamePoint(pokers.slice(0, 3)) || isSamePoint(pokers.slice(1));
+    if (pokers.length === 4) {
+        return isSamePoint(pokers.slice(0, 3)) || isSamePoint(pokers.slice(1));
+
+    } else if (pokers.length === 5) {
+        return (isSamePoint(pokers.slice(0, 3)) && isSamePoint(pokers.slice(3))) || (isSamePoint(pokers.slice(2)) && isSamePoint(pokers.slice(0, 2)));
+
+    } else {
+        return false;
+    }
+
 };
 
 /**

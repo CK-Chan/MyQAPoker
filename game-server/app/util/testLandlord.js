@@ -186,4 +186,20 @@ function testSiDaiEr() {
     }
 }
 
-testSiDaiEr();
+// testSiDaiEr();
+
+//测试 3带1
+function testSanDaiYi() {
+    for (let i = 0; i < 1000; i++) {
+        let pokers = generatePokers(3, 6);
+        // let pokers = [{point:5},{point:5},{point:5},
+        //     {point:6},{point:6},{point:6},
+        //     {point:4},{point:4},{point:4}];
+
+        if (landlord.isSanDaiYi(pokers)) {
+            printPokers(pokers, '3带1');
+        }
+    }
+}
+
+testSanDaiYi();
