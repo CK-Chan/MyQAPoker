@@ -139,6 +139,29 @@ landlord.isDuiWang = function (pokers) {
 };
 
 /**
+ * 是否 连对
+ */
+landlord.isLianDui = function (pokers) {
+    if (!pokers || !pokers.length || pokers.length < 6 || (pokers.length % 2 !== 0)) {
+        return false;
+    }
+
+    let result = true;
+    sortPokers(pokers);
+
+    //第1和第2、第3和第4....点数相同 ； 第1和第3、第3和第5.... 点数相差1
+    for (let i = 0; i < pokers.length - 1; i += 2) {
+        if ((pokers[i].point !== pokers[i + 1].point)
+            || ((i + 2 < pokers.length) && ((pokers[i + 2].point - pokers[i].point) !== 1 ))) {
+            result = false;
+            break;
+        }
+    }
+
+    return result;
+};
+
+/**
  * 整理牌组 , 从小到大
  * 目前只是按点数排序，没有加入花色判断
  *

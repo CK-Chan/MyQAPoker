@@ -140,4 +140,18 @@ function testDuiWang() {
     }
 }
 
-testDuiWang();
+// testDuiWang();
+
+//测试连对
+function testLianDui() {
+    for (let i = 0; i < 100000; i++) {
+        let pokers = generatePokers(4, 17);
+        // let pokers = [{point:3},{point:3},{point:4},{point:4},{point:5},{point:5}];
+
+        if (landlord.isLianDui(pokers)) {
+            printPokers(pokers, '连对');
+        }
+    }
+}
+
+testLianDui();
