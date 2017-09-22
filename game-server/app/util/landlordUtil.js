@@ -149,6 +149,10 @@ landlord.isLianDui = function (pokers) {
     let result = true;
     sortPokers(pokers);
 
+    if(pokers[pokers.length -1].point > 14) {      // 排除 对2
+        return false;
+    }
+
     //第1和第2、第3和第4....点数相同 ； 第1和第3、第3和第5.... 点数相差1
     for (let i = 0; i < pokers.length - 1; i += 2) {
         if ((pokers[i].point !== pokers[i + 1].point)
