@@ -213,6 +213,46 @@ landlord.isFeiJiBuDai = function (pokers) {
 };
 
 /**
+ * 是否 飞机带翅膀
+ * 三顺 + 同数量的单牌或者同数量的对牌
+ * 只有四种情况 : 2三顺+2单、2三顺+2对、3三顺+3单、3三顺+3对
+ */
+landlord.isFeiJiDaiChiBang = function (pokers) {
+    if (!pokers || !pokers.length) {
+        return false;
+    }
+
+    let result = false;
+    sortPokers(pokers);
+
+    if (pokers.length === 8) {
+        result = landlord.isFeiJiBuDai(pokers.slice(0, 6))
+            || landlord.isFeiJiBuDai(pokers.slice(1, 7))
+            || landlord.isFeiJiBuDai(pokers.slice(2));
+
+    } else if (pokers.length === 10) {
+        result = (landlord.isFeiJiBuDai(pokers.slice(0, 6)) && isSamePoint(pokers.slice(6, 8)) && isSamePoint(pokers.slice(8)))
+            || (landlord.isFeiJiBuDai(pokers.slice(2, 8)) && isSamePoint(pokers.slice(0, 2)) && isSamePoint(pokers.slice(8)))
+            || (landlord.isFeiJiBuDai(pokers.slice(4)) && isSamePoint(pokers.slice(0, 2)) && isSamePoint(pokers.slice(2, 4)));
+
+    } else if (pokers.length === 12) {
+        result = landlord.isFeiJiBuDai(pokers.slice(0, 9))
+            || landlord.isFeiJiBuDai(pokers.slice(1, 10))
+            || landlord.isFeiJiBuDai(pokers.slice(2, 11))
+            || landlord.isFeiJiBuDai(pokers.slice(3));
+
+    } else if (pokers.length === 15) {
+        result = (landlord.isFeiJiBuDai(pokers.slice(0, 9)) && isSamePoint(pokers.slice(9, 11)) && isSamePoint(pokers.slice(11, 13)) && isSamePoint(pokers.slice(13)))
+            || (landlord.isFeiJiBuDai(pokers.slice(2, 11)) && isSamePoint(pokers.slice(0, 2)) && isSamePoint(pokers.slice(11, 13)) && isSamePoint(pokers.slice(13)))
+            || (landlord.isFeiJiBuDai(pokers.slice(4, 13)) && isSamePoint(pokers.slice(0, 2)) && isSamePoint(pokers.slice(2, 4)) && isSamePoint(pokers.slice(13)) )
+            || (landlord.isFeiJiBuDai(pokers.slice(6)) && isSamePoint(pokers.slice(0, 2)) && isSamePoint(pokers.slice(2, 4)) && isSamePoint(pokers.slice(4, 6)) );
+
+    }
+
+    return result;
+};
+
+/**
  * 是否 4带2（两个单牌 或 两对）
  */
 landlord.isSiDaiEr = function (pokers) {

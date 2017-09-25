@@ -172,6 +172,23 @@ function testFeiJiBuDai() {
 
 // testFeiJiBuDai();
 
+//测试飞机带翅膀
+function testFeiJiDaiChiBang() {
+    for (let i = 0; i < 10000; i++) {
+        let pokers = generatePokers(7, 16);
+        // let pokers = [{point:3},{point:3},{point:3},
+        //     {point:13},{point:13},{point:13},
+        //     {point:14},{point:14},{point:14},
+        //     {point:15},{point:15},{point:15}];
+
+        if (landlord.isFeiJiDaiChiBang(pokers)) {
+            printPokers(pokers, '飞机带翅膀');
+        }
+    }
+}
+
+testFeiJiDaiChiBang();
+
 //测试 4带2
 function testSiDaiEr() {
     for (let i = 0; i < 100000; i++) {
@@ -202,4 +219,4 @@ function testSanDaiYi() {
     }
 }
 
-testSanDaiYi();
+// testSanDaiYi();
