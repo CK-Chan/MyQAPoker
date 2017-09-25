@@ -440,11 +440,11 @@ landlord.compareTwoPokers = function (prePokers, prePokersType, myPokers, myPoke
     }
     // 顺子 , 只需比较最大牌（或最小牌）的大小
     else if (prePokersType === landlord.PokersType.CONTINUOUS && myPokersType === landlord.PokersType.CONTINUOUS) {
-        return myPokers[0].point > preSize[0].point;
+        return myPokers[0].point > prePokers[0].point;
     }
     // 连对 , 只需比较最大牌（或最小牌）的大小
     else if (prePokersType === landlord.PokersType.DOUBLE_CONTINUOUS && myPokersType === landlord.PokersType.DOUBLE_CONTINUOUS) {
-        return myPokers[0].point > preSize[0].point;
+        return myPokers[0].point > prePokers[0].point;
     }
     // 4带2 , 带两单，则比较 第3或第4张牌的大小 ; 带两对，则比较重复次数最多的牌
     else if (prePokersType === landlord.PokersType.QUADRUPLE_WITH_TWO && myPokersType === landlord.PokersType.QUADRUPLE_WITH_TWO) {
@@ -457,7 +457,7 @@ landlord.compareTwoPokers = function (prePokers, prePokersType, myPokers, myPoke
     }
     // 飞机不带
     else if (prePokersType === landlord.PokersType.AIRPLANE_WITH_NONE && myPokersType === landlord.PokersType.AIRPLANE_WITH_NONE) {
-        return myPokers[0].point > preSize[0].point;
+        return myPokers[0].point > prePokers[0].point;
     }
     // 飞机带翅膀
     else if (prePokersType === landlord.PokersType.AIRPLANE_WITH_WING && myPokersType === landlord.PokersType.AIRPLANE_WITH_WING) {
