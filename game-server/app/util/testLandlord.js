@@ -219,12 +219,23 @@ function testPokerType() {
 function testCompareTwoPokers() {
     // let pokers1 = generatePokers(2, 17);
     // let pokers2 = generatePokers(2, 17);
-    let pokers1 = [{point: 5}, {point: 5}, {point: 5}, {point: 5}, {point: 8}, {point: 6}];
-    let pokers2 = [{point: 6}, {point: 6}, {point: 6}, {point: 6}, {point: 8}, {point: 8}];
+    let pokers1 = getPoker(3, 3, 3, 4, 4, 4, 16, 16);
+    let pokers2 = getPoker(5, 5, 5, 6, 6, 6, 11, 12);
+
     let result = landlord.compareTwoPokers(pokers1, landlord.getPokersType(pokers1), pokers2, landlord.getPokersType(pokers2));
     printPokers(pokers1, '上家牌组');
     printPokers(pokers2, '我方牌组');
-    console.log('我方牌组更大么? ' + result)
+    console.log('我方牌组更大么? ' + result);
+}
+
+// 传入需要的扑克牌点数，生成牌组
+function getPoker() {
+    let res = [];
+
+    for (let i = 0; i < arguments.length; i++) {
+        res.push({point: arguments[i]});
+    }
+    return res;
 }
 
 // testZhaDan();
