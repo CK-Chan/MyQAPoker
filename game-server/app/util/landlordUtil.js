@@ -79,21 +79,21 @@ landlord.distribute = function (pokers) {
 /**
  * 是否 单张
  */
-landlord.isDan = function (pokers) {
+landlord.isOnePoker = function (pokers) {
     return !!(pokers && pokers.length === 1);
 };
 
 /**
  * 是否 对子
  */
-landlord.isDuiZi = function (pokers) {
+landlord.isDoublePoker = function (pokers) {
     return !!(pokers && pokers.length && pokers.length === 2 && isSamePoint(pokers));
 };
 
 /**
  * 是否 三不带
  */
-landlord.isSanBuDai = function (pokers) {
+landlord.isTriplePokerWithNone = function (pokers) {
     return !!(pokers && pokers.length && pokers.length === 3 && isSamePoint(pokers));
 };
 
@@ -101,7 +101,7 @@ landlord.isSanBuDai = function (pokers) {
  * 是否 三带一(或一对)
  * 注意炸弹不是三带一
  */
-landlord.isSanDaiYi = function (pokers) {
+landlord.isTriplePokerWithOne = function (pokers) {
     // 排除炸弹
     if (!pokers || !pokers.length || (pokers.length !== 4 && pokers.length !== 5) || isSamePoint(pokers)) {
         return false;
@@ -125,7 +125,7 @@ landlord.isSanDaiYi = function (pokers) {
  * 是否 顺子（单顺）
  * 顺子牌的个数为 5到12张
  */
-landlord.isShunZi = function (pokers) {
+landlord.isContinuousPoker = function (pokers) {
     if (!pokers || !pokers.length || pokers.length < 5 || pokers.length > 12) {
         return false;
     }
@@ -138,21 +138,21 @@ landlord.isShunZi = function (pokers) {
 /**
  * 是否 炸弹
  */
-landlord.isZhaDan = function (pokers) {
+landlord.isBombPoker = function (pokers) {
     return !!(pokers && pokers.length && pokers.length === 4 && isSamePoint(pokers));
 };
 
 /**
  * 是否 王炸
  */
-landlord.isDuiWang = function (pokers) {
+landlord.isJokerBombPoker = function (pokers) {
     return !!(pokers && pokers.length && pokers.length === 2 && (pokers[0].point + pokers[1].point === 33));
 };
 
 /**
  * 是否 连对(双顺)
  */
-landlord.isLianDui = function (pokers) {
+landlord.isDoubleContinuousPoker = function (pokers) {
     if (!pokers || !pokers.length || pokers.length < 6 || (pokers.length % 2 !== 0)) {
         return false;
     }
@@ -184,7 +184,7 @@ landlord.isLianDui = function (pokers) {
 /**
  * 是否 飞机不带(三顺)
  */
-landlord.isFeiJiBuDai = function (pokers) {
+landlord.isAirplaneWithNonePoker = function (pokers) {
     if (!pokers || !pokers.length || pokers.length < 6 || (pokers.length % 3 !== 0)) {
         return false;
     }
@@ -216,7 +216,7 @@ landlord.isFeiJiBuDai = function (pokers) {
  * 三顺 + 同数量的单牌或者同数量的对牌
  * 只有四种情况 : 2三顺+2单、2三顺+2对、3三顺+3单、3三顺+3对
  */
-landlord.isFeiJiDaiChiBang = function (pokers) {
+landlord.isAirplaneWithSomePoker = function (pokers) {
     if (!pokers || !pokers.length) {
         return false;
     }
@@ -225,26 +225,26 @@ landlord.isFeiJiDaiChiBang = function (pokers) {
     sortPokers(pokers);
 
     if (pokers.length === 8) {
-        result = landlord.isFeiJiBuDai(pokers.slice(0, 6))
-            || landlord.isFeiJiBuDai(pokers.slice(1, 7))
-            || landlord.isFeiJiBuDai(pokers.slice(2));
+        result = landlord.isAirplaneWithNonePoker(pokers.slice(0, 6))
+            || landlord.isAirplaneWithNonePoker(pokers.slice(1, 7))
+            || landlord.isAirplaneWithNonePoker(pokers.slice(2));
 
     } else if (pokers.length === 10) {
-        result = (landlord.isFeiJiBuDai(pokers.slice(0, 6)) && isSamePoint(pokers.slice(6, 8)) && isSamePoint(pokers.slice(8)))
-            || (landlord.isFeiJiBuDai(pokers.slice(2, 8)) && isSamePoint(pokers.slice(0, 2)) && isSamePoint(pokers.slice(8)))
-            || (landlord.isFeiJiBuDai(pokers.slice(4)) && isSamePoint(pokers.slice(0, 2)) && isSamePoint(pokers.slice(2, 4)));
+        result = (landlord.isAirplaneWithNonePoker(pokers.slice(0, 6)) && isSamePoint(pokers.slice(6, 8)) && isSamePoint(pokers.slice(8)))
+            || (landlord.isAirplaneWithNonePoker(pokers.slice(2, 8)) && isSamePoint(pokers.slice(0, 2)) && isSamePoint(pokers.slice(8)))
+            || (landlord.isAirplaneWithNonePoker(pokers.slice(4)) && isSamePoint(pokers.slice(0, 2)) && isSamePoint(pokers.slice(2, 4)));
 
     } else if (pokers.length === 12) {
-        result = landlord.isFeiJiBuDai(pokers.slice(0, 9))
-            || landlord.isFeiJiBuDai(pokers.slice(1, 10))
-            || landlord.isFeiJiBuDai(pokers.slice(2, 11))
-            || landlord.isFeiJiBuDai(pokers.slice(3));
+        result = landlord.isAirplaneWithNonePoker(pokers.slice(0, 9))
+            || landlord.isAirplaneWithNonePoker(pokers.slice(1, 10))
+            || landlord.isAirplaneWithNonePoker(pokers.slice(2, 11))
+            || landlord.isAirplaneWithNonePoker(pokers.slice(3));
 
     } else if (pokers.length === 15) {
-        result = (landlord.isFeiJiBuDai(pokers.slice(0, 9)) && isSamePoint(pokers.slice(9, 11)) && isSamePoint(pokers.slice(11, 13)) && isSamePoint(pokers.slice(13)))
-            || (landlord.isFeiJiBuDai(pokers.slice(2, 11)) && isSamePoint(pokers.slice(0, 2)) && isSamePoint(pokers.slice(11, 13)) && isSamePoint(pokers.slice(13)))
-            || (landlord.isFeiJiBuDai(pokers.slice(4, 13)) && isSamePoint(pokers.slice(0, 2)) && isSamePoint(pokers.slice(2, 4)) && isSamePoint(pokers.slice(13)) )
-            || (landlord.isFeiJiBuDai(pokers.slice(6)) && isSamePoint(pokers.slice(0, 2)) && isSamePoint(pokers.slice(2, 4)) && isSamePoint(pokers.slice(4, 6)) );
+        result = (landlord.isAirplaneWithNonePoker(pokers.slice(0, 9)) && isSamePoint(pokers.slice(9, 11)) && isSamePoint(pokers.slice(11, 13)) && isSamePoint(pokers.slice(13)))
+            || (landlord.isAirplaneWithNonePoker(pokers.slice(2, 11)) && isSamePoint(pokers.slice(0, 2)) && isSamePoint(pokers.slice(11, 13)) && isSamePoint(pokers.slice(13)))
+            || (landlord.isAirplaneWithNonePoker(pokers.slice(4, 13)) && isSamePoint(pokers.slice(0, 2)) && isSamePoint(pokers.slice(2, 4)) && isSamePoint(pokers.slice(13)) )
+            || (landlord.isAirplaneWithNonePoker(pokers.slice(6)) && isSamePoint(pokers.slice(0, 2)) && isSamePoint(pokers.slice(2, 4)) && isSamePoint(pokers.slice(4, 6)) );
 
     }
 
@@ -259,13 +259,13 @@ landlord.isAirplane = function (pokers) {
         return false;
     }
 
-    return landlord.isFeiJiBuDai(pokers) || landlord.isFeiJiDaiChiBang(pokers);
+    return landlord.isAirplaneWithNonePoker(pokers) || landlord.isAirplaneWithSomePoker(pokers);
 };
 
 /**
  * 是否 4带2（两个单牌 或 两对）
  */
-landlord.isSiDaiEr = function (pokers) {
+landlord.isQuadruplePokerWithTwo = function (pokers) {
     if (!pokers || !pokers.length) {
         return false;
     }

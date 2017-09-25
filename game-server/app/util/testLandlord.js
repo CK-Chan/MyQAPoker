@@ -81,19 +81,19 @@ function testPokerType() {
     for (let i = 0; i < 100; i++) {
         let pokers = generatePokers();
 
-        if (landlord.isDan(pokers)) {
+        if (landlord.isOnePoker(pokers)) {
             printPokers(pokers, '单张');
 
-        } else if (landlord.isDuiZi(pokers)) {
+        } else if (landlord.isDoublePoker(pokers)) {
             printPokers(pokers, '对子');
 
-        } else if (landlord.isSanBuDai(pokers)) {
+        } else if (landlord.isTriplePokerWithNone(pokers)) {
             printPokers(pokers, '三不带');
 
-        } else if (landlord.isSanDaiYi(pokers)) {
+        } else if (landlord.isTriplePokerWithOne(pokers)) {
             printPokers(pokers, '三带一');
 
-        } else if (landlord.isShunZi(pokers)) {
+        } else if (landlord.isContinuousPoker(pokers)) {
             printPokers(pokers, '顺子');
 
         } else {
@@ -104,10 +104,10 @@ function testPokerType() {
 
 //测试顺子
 function testShunZi() {
-    for (let i = 0; i < 1000; i++) {
+    for (let i = 0; i < 10000; i++) {
         let pokers = generatePokers();
 
-        if (landlord.isShunZi(pokers)) {
+        if (landlord.isContinuousPoker(pokers)) {
             printPokers(pokers, '顺子');
         }
     }
@@ -118,7 +118,7 @@ function testZhaDan() {
     for (let i = 0; i < 10000; i++) {
         let pokers = generatePokers(3, 5);
 
-        if (landlord.isZhaDan(pokers)) {
+        if (landlord.isBombPoker(pokers)) {
             printPokers(pokers, '炸弹');
         }
     }
@@ -129,7 +129,7 @@ function testDuiWang() {
     for (let i = 0; i < 1000; i++) {
         let pokers = generatePokers(1, 4);
 
-        if (landlord.isDuiWang(pokers)) {
+        if (landlord.isJokerBombPoker(pokers)) {
             printPokers(pokers, '王炸');
         }
     }
@@ -141,7 +141,7 @@ function testLianDui() {
         let pokers = generatePokers(4, 17);
         // let pokers = [{point:13},{point:13},{point:14},{point:14},{point:15},{point:15}];
 
-        if (landlord.isLianDui(pokers)) {
+        if (landlord.isDoubleContinuousPoker(pokers)) {
             printPokers(pokers, '连对');
         }
     }
@@ -155,7 +155,7 @@ function testFeiJiBuDai() {
         //     {point:6},{point:6},{point:6},
         //     {point:4},{point:4},{point:4}];
 
-        if (landlord.isFeiJiBuDai(pokers)) {
+        if (landlord.isAirplaneWithNonePoker(pokers)) {
             printPokers(pokers, '飞机不带');
         }
     }
@@ -170,7 +170,7 @@ function testFeiJiDaiChiBang() {
         //     {point:14},{point:14},{point:14},
         //     {point:15},{point:15},{point:15}];
 
-        if (landlord.isFeiJiDaiChiBang(pokers)) {
+        if (landlord.isAirplaneWithSomePoker(pokers)) {
             printPokers(pokers, '飞机带翅膀');
         }
     }
@@ -198,7 +198,7 @@ function testSiDaiEr() {
         //     {point:6},{point:6},{point:6},
         //     {point:4},{point:4},{point:4}];
 
-        if (landlord.isSiDaiEr(pokers)) {
+        if (landlord.isQuadruplePokerWithTwo(pokers)) {
             printPokers(pokers, '4带2');
         }
     }
@@ -212,7 +212,7 @@ function testSanDaiYi() {
         //     {point:6},{point:6},{point:6},
         //     {point:4},{point:4},{point:4}];
 
-        if (landlord.isSanDaiYi(pokers)) {
+        if (landlord.isTriplePokerWithOne(pokers)) {
             printPokers(pokers, '3带1');
         }
     }
