@@ -74,34 +74,6 @@ function testIsContinuous() {
     }
 }
 
-/**
- * 总体测试 牌组类型
- */
-function testPokerType() {
-    for (let i = 0; i < 100; i++) {
-        let pokers = generatePokers();
-
-        if (landlord.isOnePoker(pokers)) {
-            printPokers(pokers, '单张');
-
-        } else if (landlord.isDoublePoker(pokers)) {
-            printPokers(pokers, '对子');
-
-        } else if (landlord.isTriplePokerWithNone(pokers)) {
-            printPokers(pokers, '三不带');
-
-        } else if (landlord.isTriplePokerWithOne(pokers)) {
-            printPokers(pokers, '三带一');
-
-        } else if (landlord.isContinuousPoker(pokers)) {
-            printPokers(pokers, '顺子');
-
-        } else {
-            // printPokers(pokers, '啥也不是');
-        }
-    }
-}
-
 //测试顺子
 function testShunZi() {
     for (let i = 0; i < 10000; i++) {
@@ -118,7 +90,7 @@ function testZhaDan() {
     for (let i = 0; i < 10000; i++) {
         let pokers = generatePokers(3, 5);
 
-        if (landlord.isBombPoker(pokers)) {
+        if (landlord.isBomb(pokers)) {
             printPokers(pokers, '炸弹');
         }
     }
@@ -129,7 +101,7 @@ function testDuiWang() {
     for (let i = 0; i < 1000; i++) {
         let pokers = generatePokers(1, 4);
 
-        if (landlord.isJokerBombPoker(pokers)) {
+        if (landlord.isJokerBomb(pokers)) {
             printPokers(pokers, '王炸');
         }
     }
@@ -155,7 +127,7 @@ function testFeiJiBuDai() {
         //     {point:6},{point:6},{point:6},
         //     {point:4},{point:4},{point:4}];
 
-        if (landlord.isAirplaneWithNonePoker(pokers)) {
+        if (landlord.isAirplaneWithNone(pokers)) {
             printPokers(pokers, '飞机不带');
         }
     }
@@ -170,7 +142,7 @@ function testFeiJiDaiChiBang() {
         //     {point:14},{point:14},{point:14},
         //     {point:15},{point:15},{point:15}];
 
-        if (landlord.isAirplaneWithSomePoker(pokers)) {
+        if (landlord.isAirplaneWithWing(pokers)) {
             printPokers(pokers, '飞机带翅膀');
         }
     }
@@ -198,7 +170,7 @@ function testSiDaiEr() {
         //     {point:6},{point:6},{point:6},
         //     {point:4},{point:4},{point:4}];
 
-        if (landlord.isQuadruplePokerWithTwo(pokers)) {
+        if (landlord.isQuadrupleWithTwo(pokers)) {
             printPokers(pokers, '4带2');
         }
     }
@@ -212,10 +184,47 @@ function testSanDaiYi() {
         //     {point:6},{point:6},{point:6},
         //     {point:4},{point:4},{point:4}];
 
-        if (landlord.isTriplePokerWithOne(pokers)) {
+        if (landlord.isTripleWithOne(pokers)) {
             printPokers(pokers, '3带1');
         }
     }
+}
+
+//测试 查出牌组中，指定张数的牌的最大点数
+function testGetRepeatMostPoker() {
+    let pokers = generatePokers(2, 17);
+    // let pokers = [{point: 5}, {point: 5}, {point: 5},
+    //     {point: 10}, {point: 12}, {point: 13},
+    //     {point: 15}, {point: 15}, {point: 15}];
+    let number = 3;
+    printPokers(pokers, '牌组' + pokers.length + '张 ');
+    let result = landlord.getRepeatMostPoker(pokers, number);
+    console.log('查找结果 : ' + result + ' 是出现' + number + '张的最大点数');
+}
+
+/**
+ * 测试 牌组类型
+ */
+function testPokerType() {
+    for (let i = 0; i < 1; i++) {
+        let pokers = generatePokers(1, 8);
+        // let pokers = [{point: 13}, {point: 13}, {point: 13}, {point: 13}, {point: 14}, {point: 14}, {point: 14}, {point: 14}];
+        let res = landlord.getPokersType(pokers);
+
+        printPokers(pokers, '牌组类型: ' + res);
+    }
+}
+
+//测试 两次出牌的大小
+function testCompareTwoPokers() {
+    // let pokers1 = generatePokers(2, 17);
+    // let pokers2 = generatePokers(2, 17);
+    let pokers1 = [{point: 5}, {point: 5}, {point: 5}, {point: 5}, {point: 8}, {point: 6}];
+    let pokers2 = [{point: 6}, {point: 6}, {point: 6}, {point: 6}, {point: 8}, {point: 8}];
+    let result = landlord.compareTwoPokers(pokers1, landlord.getPokersType(pokers1), pokers2, landlord.getPokersType(pokers2));
+    printPokers(pokers1, '上家牌组');
+    printPokers(pokers2, '我方牌组');
+    console.log('我方牌组更大么? ' + result)
 }
 
 // testZhaDan();
@@ -226,4 +235,8 @@ function testSanDaiYi() {
 // testFeiJiBuDai();
 // testFeiJiDaiChiBang();
 // testSiDaiEr();
-testIsAirplane();
+// testIsAirplane();
+
+// testGetRepeatMostPoker();
+// testPokerType();
+testCompareTwoPokers();
