@@ -176,6 +176,20 @@ function testFeiJiDaiChiBang() {
     }
 }
 
+//测试 飞机
+function testIsAirplane() {
+    for (let i = 0; i < 10000; i++) {
+        let pokers = generatePokers(2, 17);
+        // let pokers = [{point:5},{point:5},{point:5},
+        //     {point:6},{point:6},{point:6},
+        //     {point:4},{point:4},{point:4}];
+
+        if (landlord.isAirplane(pokers)) {
+            printPokers(pokers, '飞机');
+        }
+    }
+}
+
 //测试 4带2
 function testSiDaiEr() {
     for (let i = 0; i < 10000; i++) {
@@ -211,4 +225,5 @@ function testSanDaiYi() {
 // testLianDui();
 // testFeiJiBuDai();
 // testFeiJiDaiChiBang();
-testSiDaiEr();
+// testSiDaiEr();
+testIsAirplane();

@@ -252,6 +252,17 @@ landlord.isFeiJiDaiChiBang = function (pokers) {
 };
 
 /**
+ * 是否 飞机
+ */
+landlord.isAirplane = function (pokers) {
+    if (!pokers || !pokers.length) {
+        return false;
+    }
+
+    return landlord.isFeiJiBuDai(pokers) || landlord.isFeiJiDaiChiBang(pokers);
+};
+
+/**
  * 是否 4带2（两个单牌 或 两对）
  */
 landlord.isSiDaiEr = function (pokers) {
