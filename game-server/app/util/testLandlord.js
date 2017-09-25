@@ -102,7 +102,6 @@ function testPokerType() {
     }
 }
 
-
 //测试顺子
 function testShunZi() {
     for (let i = 0; i < 1000; i++) {
@@ -113,8 +112,6 @@ function testShunZi() {
         }
     }
 }
-
-// testShunZi();
 
 //测试炸弹
 function testZhaDan() {
@@ -127,8 +124,6 @@ function testZhaDan() {
     }
 }
 
-// testZhaDan();
-
 //测试王炸
 function testDuiWang() {
     for (let i = 0; i < 1000; i++) {
@@ -139,8 +134,6 @@ function testDuiWang() {
         }
     }
 }
-
-// testDuiWang();
 
 //测试连对
 function testLianDui() {
@@ -153,8 +146,6 @@ function testLianDui() {
         }
     }
 }
-
-// testLianDui();
 
 //测试飞机不带
 function testFeiJiBuDai() {
@@ -169,8 +160,6 @@ function testFeiJiBuDai() {
         }
     }
 }
-
-// testFeiJiBuDai();
 
 //测试飞机带翅膀
 function testFeiJiDaiChiBang() {
@@ -187,11 +176,9 @@ function testFeiJiDaiChiBang() {
     }
 }
 
-testFeiJiDaiChiBang();
-
 //测试 4带2
 function testSiDaiEr() {
-    for (let i = 0; i < 100000; i++) {
+    for (let i = 0; i < 10000; i++) {
         let pokers = generatePokers(6, 9);
         // let pokers = [{point:5},{point:5},{point:5},
         //     {point:6},{point:6},{point:6},
@@ -202,8 +189,6 @@ function testSiDaiEr() {
         }
     }
 }
-
-// testSiDaiEr();
 
 //测试 3带1
 function testSanDaiYi() {
@@ -219,4 +204,11 @@ function testSanDaiYi() {
     }
 }
 
+// testZhaDan();
+// testDuiWang();
 // testSanDaiYi();
+// testShunZi();
+// testLianDui();
+// testFeiJiBuDai();
+// testFeiJiDaiChiBang();
+testSiDaiEr();

@@ -69,7 +69,7 @@ landlord.distribute = function (pokers) {
         playerPokers[random].push(pokers.pop());
     }
 
-    playerPokers.forEach(function (pokers, index, array) {
+    playerPokers.forEach(function (pokers) {
         sortPokers(pokers);
     });
 
@@ -100,7 +100,6 @@ landlord.isSanBuDai = function (pokers) {
 /**
  * 是否 三带一(或一对)
  * 注意炸弹不是三带一
- * TODO 处理 一对的情况
  */
 landlord.isSanDaiYi = function (pokers) {
     // 排除炸弹
@@ -256,32 +255,25 @@ landlord.isFeiJiDaiChiBang = function (pokers) {
  * 是否 4带2（两个单牌 或 两对）
  */
 landlord.isSiDaiEr = function (pokers) {
-    if (!pokers || !pokers.length || (pokers.length !== 6 && pokers.length !== 8)) {
+    if (!pokers || !pokers.length) {
         return false;
     }
 
+    let result = false;
     sortPokers(pokers);
 
     //是否有四张相同点数
     if (pokers.length === 6) {
-        return isSamePoint(pokers.slice(0, 4)) || isSamePoint(pokers.slice(1, 5)) || isSamePoint(pokers.slice(2));
+        result = isSamePoint(pokers.slice(0, 4)) || isSamePoint(pokers.slice(1, 5)) || isSamePoint(pokers.slice(2));
 
     } else if (pokers.length === 8) {
-        if (isSamePoint(pokers.slice(0, 4))) {
-            return isSamePoint(pokers.slice(4, 6)) && isSamePoint(pokers.slice(6));
+        result = (isSamePoint(pokers.slice(0, 4)) && isSamePoint(pokers.slice(4, 6)) && isSamePoint(pokers.slice(6)))
+            || (isSamePoint(pokers.slice(2, 6)) && isSamePoint(pokers.slice(0, 2)) && isSamePoint(pokers.slice(6)))
+            || (isSamePoint(pokers.slice(4)) && isSamePoint(pokers.slice(0, 2)) && isSamePoint(pokers.slice(2, 4)));
 
-        } else if (isSamePoint(pokers.slice(2, 6))) {
-            return isSamePoint(pokers.slice(0, 2)) && isSamePoint(pokers.slice(6));
-
-        } else if (isSamePoint(pokers.slice(4))) {
-            return isSamePoint(pokers.slice(0, 2)) && isSamePoint(pokers.slice(2, 4));
-        }
-
-    } else {
-        return false;
     }
 
-
+    return result;
 };
 
 /**
