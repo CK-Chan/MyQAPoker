@@ -52,7 +52,7 @@ landlord.shuffle = function (pokers, times) {
  * 发牌
  *
  * @param  pokers {Array}  待发的牌组.
- * @return {Array} 返回数组格式为 [[], [], []]
+ * @return {Array} 返回数组格式为 [[], [], [] ,[]]  前三个是玩家的牌，最后一个是地主的三张牌
  */
 landlord.distribute = function (pokers) {
     let playerPokers = [[], [], []];
@@ -63,11 +63,11 @@ landlord.distribute = function (pokers) {
         }
     }
 
-    let random = Math.floor(Math.random() * 3);
-
+    let threePokers = [];
     for (let i = 0; i < 3; i++) {
-        playerPokers[random].push(pokers.pop());
+        threePokers.push(pokers.pop());
     }
+    playerPokers.push(threePokers);
 
     playerPokers.forEach(function (pokers) {
         sortPokers(pokers);

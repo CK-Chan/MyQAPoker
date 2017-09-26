@@ -250,4 +250,5 @@ function getPoker() {
 
 // testGetRepeatMostPoker();
 // testPokerType();
-testCompareTwoPokers();
+// testCompareTwoPokers();
+testDistributeResult();
