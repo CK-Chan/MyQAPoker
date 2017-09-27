@@ -9,7 +9,7 @@ let landlord = module.exports;
  *
  * 单张牌格式为: { point , type}
  * point点数，[3,17] ,其中A为14点, 2为15点，小王16点，大王17
- * type类型，0黑桃，1红桃，2梅花，3方块，50小王，100大王
+ * type花色，0黑桃，1红桃，2梅花，3方块，50小王，100大王
  *
  * @return {Array} 返回一副扑克牌.
  */
@@ -288,15 +288,22 @@ landlord.isQuadrupleWithTwo = function (pokers) {
 };
 
 /**
- * 整理牌组 , 从小到大
- * 目前只是按点数排序，没有加入花色判断
+ * 整理牌组 ,按点数point从小到大 , 同点数的按花色type从小到大排序（0黑桃，1红桃，2梅花，3方块，50小王，100大王）
  *
  * @param pokers
  * @return {*}
  */
 function sortPokers(pokers) {
     pokers.sort(function (a, b) {
-        return a.point - b.point;
+        if (a.point > b.point) {
+            return 1;
+
+        } else if (a.point === b.point && a.type > b.type) {
+            return 1;
+
+        } else {
+            return 0;
+        }
     });
     return pokers;
 }

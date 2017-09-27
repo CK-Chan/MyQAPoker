@@ -6,17 +6,18 @@ let random = require('./randomUtil');
 /**
  * 随机生成 1到17张牌，可能17张牌都相同
  *
- * @param min {Number} 最少牌数 , 默认为1
+ * @param min {Number} 最少牌数 , 默认为3
  * @param max {Number} 最多牌数 ， 默认为17
  * @return {Array}
  */
 function generatePokers(min, max) {
-    let n = min || 1;
+    let n = min || 3;
     let m = max || 17;
     let num = random.generateIntRandom(n, m);
+    let type = random.generateIntRandom(0, 3);
     let pokers = [];
     for (let i = 0; i < num; i++) {
-        pokers.push({point: random.generateIntRandom(3, 17)})
+        pokers.push({point: random.generateIntRandom(n, m), type: type});
     }
     return pokers;
 }
@@ -238,6 +239,27 @@ function getPoker() {
     return res;
 }
 
+/**
+ * 测试 牌组排序
+ */
+function testPokerType() {
+    for (let i = 0; i < 1; i++) {
+        // let pokers = generatePokers(2, 8);
+        let pokers = [{point: 13, type: 3},
+            {point: 13, type: 0},
+            {point: 16, type: 2},
+            {point: 13, type: 1},
+            {point: 10, type: 1},
+            {point: 16, type: 1},
+            {point: 16, type: 0},
+            {point: 14, type: 1}];
+        console.log('牌组排序前 ', pokers);
+        landlord.sortPokers(pokers);
+
+        console.log('牌组排序后 ', pokers);
+    }
+}
+
 // testZhaDan();
 // testDuiWang();
 // testSanDaiYi();
@@ -251,4 +273,5 @@ function getPoker() {
 // testGetRepeatMostPoker();
 // testPokerType();
 // testCompareTwoPokers();
-testDistributeResult();
+// testDistributeResult();
+testPokerType();
