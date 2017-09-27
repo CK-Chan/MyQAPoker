@@ -552,3 +552,23 @@ landlord.getPokersType = function (pokers) {
 
     return result;
 };
+
+/**
+ * 出牌
+ *
+ * @param playPokers {Array} 打出去的牌
+ * @param handPokers {Array} 手牌
+ *
+ * @return {Array} 返回出过牌后的手牌
+ */
+landlord.playPoker = function (playPokers, handPokers) {
+    let result = [];
+
+    result = handPokers.filter(function (poker1) {
+        return playPokers.every(function (poker2) {
+            return poker2.point !== poker1.point || poker2.type !== poker1.type;
+        })
+    });
+
+    return result;
+};

@@ -260,6 +260,31 @@ function testPokerType() {
     }
 }
 
+/**
+ * 测试 出牌
+ */
+function testPlayPoker() {
+    for (let i = 0; i < 1; i++) {
+        let playPokers = [
+            {point: 14, type: 1},
+            {point: 10, type: 1},
+            {point: 14, type: 1},
+            {point: 1, type: 1}];
+
+        let HandPokers = [{point: 13, type: 3},
+            {point: 13, type: 0},
+            {point: 16, type: 2},
+            {point: 13, type: 1},
+            {point: 10, type: 1},
+            {point: 16, type: 1},
+            {point: 16, type: 0},
+            {point: 14, type: 1}];
+
+        console.log(landlord.playPoker(playPokers, HandPokers));
+
+    }
+}
+
 // testZhaDan();
 // testDuiWang();
 // testSanDaiYi();
@@ -274,4 +299,5 @@ function testPokerType() {
 // testPokerType();
 // testCompareTwoPokers();
 // testDistributeResult();
-testPokerType();
+// testPokerType();
+testPlayPoker();
