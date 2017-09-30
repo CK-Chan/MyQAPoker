@@ -532,7 +532,7 @@ landlord.getPokersType = function (pokers) {
 
     let result = landlord.PokersType.ERROR;
 
-    if (isLegalPokers(pokers)) {
+    if (landlord.isLegalPokers(pokers)) {
         if (landlord.isOne(pokers)) {
             result = landlord.PokersType.ONE;
 
