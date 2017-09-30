@@ -285,6 +285,20 @@ function testPlayPoker() {
     }
 }
 
+// 测试 单张功能正确性
+function testIsOne() {
+    // let pokers = [];    // false
+    let pokers = [{}];
+    console.log(pokers, '是否为单张: ', landlord.isOne(pokers));
+}
+
+// 测试 对子功能正确性
+function testIsDouble() {
+    // let pokers = [];    // false
+    let pokers = [{}, {}];
+    console.log(pokers, '是否为对子: ', landlord.isDouble(pokers));
+}
+
 // testZhaDan();
 // testDuiWang();
 // testSanDaiYi();
@@ -300,4 +314,6 @@ function testPlayPoker() {
 // testCompareTwoPokers();
 // testDistributeResult();
 // testPokerType();
-testPlayPoker();
+// testPlayPoker();
+// testIsOne();
+testIsDouble();

@@ -77,6 +77,23 @@ landlord.distribute = function (pokers) {
 };
 
 /**
+ * 扑克牌是否合法
+ *
+ * @param poekrs {Array}
+ * @return {boolean} true为合法 , false为不合法
+ */
+landlord.isLegalPokers = function (poekrs) {
+    let result = true;
+    for (let i = 0; i < poekrs.length; i++) {
+        if (!poekrs[i] || !poekrs[i].point || !poekrs[i].type) {
+            result = false;
+            break;
+        }
+    }
+    return result;
+};
+
+/**
  * 是否 单张
  */
 landlord.isOne = function (pokers) {
@@ -515,39 +532,40 @@ landlord.getPokersType = function (pokers) {
 
     let result = landlord.PokersType.ERROR;
 
-    if (landlord.isOne(pokers)) {
-        result = landlord.PokersType.ONE;
+    if (isLegalPokers(pokers)) {
+        if (landlord.isOne(pokers)) {
+            result = landlord.PokersType.ONE;
 
-    } else if (landlord.isDouble(pokers)) {
-        result = landlord.PokersType.DOUBLE;
+        } else if (landlord.isDouble(pokers)) {
+            result = landlord.PokersType.DOUBLE;
 
-    } else if (landlord.isJokerBomb(pokers)) {
-        result = landlord.PokersType.JOKER_BOMB;
+        } else if (landlord.isJokerBomb(pokers)) {
+            result = landlord.PokersType.JOKER_BOMB;
 
-    } else if (landlord.isBomb(pokers)) {
-        result = landlord.PokersType.BOMB;
+        } else if (landlord.isBomb(pokers)) {
+            result = landlord.PokersType.BOMB;
 
-    } else if (landlord.isTripleWithOne(pokers)) {
-        result = landlord.PokersType.TRIPLE_WITH_ONE;
+        } else if (landlord.isTripleWithOne(pokers)) {
+            result = landlord.PokersType.TRIPLE_WITH_ONE;
 
-    } else if (landlord.isTripleWithNone(pokers)) {
-        result = landlord.PokersType.TRIPLE_WITH_NONE;
+        } else if (landlord.isTripleWithNone(pokers)) {
+            result = landlord.PokersType.TRIPLE_WITH_NONE;
 
-    } else if (landlord.isContinuousPoker(pokers)) {
-        result = landlord.PokersType.CONTINUOUS;
+        } else if (landlord.isContinuousPoker(pokers)) {
+            result = landlord.PokersType.CONTINUOUS;
 
-    } else if (landlord.isDoubleContinuousPoker(pokers)) {
-        result = landlord.PokersType.DOUBLE_CONTINUOUS;
+        } else if (landlord.isDoubleContinuousPoker(pokers)) {
+            result = landlord.PokersType.DOUBLE_CONTINUOUS;
 
-    } else if (landlord.isQuadrupleWithTwo(pokers)) {
-        result = landlord.PokersType.QUADRUPLE_WITH_TWO;
+        } else if (landlord.isQuadrupleWithTwo(pokers)) {
+            result = landlord.PokersType.QUADRUPLE_WITH_TWO;
 
-    } else if (landlord.isAirplaneWithWing(pokers)) {
-        result = landlord.PokersType.AIRPLANE_WITH_WING;
+        } else if (landlord.isAirplaneWithWing(pokers)) {
+            result = landlord.PokersType.AIRPLANE_WITH_WING;
 
-    } else if (landlord.isAirplaneWithNone(pokers)) {
-        result = landlord.PokersType.AIRPLANE_WITH_NONE;
-
+        } else if (landlord.isAirplaneWithNone(pokers)) {
+            result = landlord.PokersType.AIRPLANE_WITH_NONE;
+        }
     }
 
     return result;
