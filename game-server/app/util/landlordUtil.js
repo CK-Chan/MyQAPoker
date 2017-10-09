@@ -607,7 +607,7 @@ landlord.isSamePoker = function (poker1, poker2) {
  * @param playPokers {Array} 打出去的牌
  * @param handPokers {Array} 手牌
  *
- * @return {Boolean}
+ * @return {Boolean} true表示全部在手牌中 ； false 表示有牌不在手牌中
  */
 landlord.isPlayPokersInHand = function (playPokers, handPokers) {
 
