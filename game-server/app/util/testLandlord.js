@@ -299,6 +299,25 @@ function testIsDouble() {
     console.log(pokers, '是否为对子: ', landlord.isDouble(pokers));
 }
 
+function testIsPlayPokersInHand() {
+    let playPokers = [
+        {point: 14, type: 1},
+        {point: 10, type: 1},
+        {point: 16, type: 2},
+        ];
+
+    let handPokers = [{point: 13, type: 3},
+        {point: 13, type: 0},
+        {point: 16, type: 2},
+        {point: 13, type: 1},
+        {point: 10, type: 1},
+        {point: 16, type: 1},
+        {point: 16, type: 0},
+        {point: 14, type: 1}];
+    let result = landlord.isPlayPokersInHand(playPokers, handPokers);
+    console.log('打出的牌是否都在手牌中: ' + result);
+}
+
 // testZhaDan();
 // testDuiWang();
 // testSanDaiYi();
@@ -316,4 +335,5 @@ function testIsDouble() {
 // testPokerType();
 // testPlayPoker();
 // testIsOne();
-testIsDouble();
+// testIsDouble();
+testIsPlayPokersInHand();

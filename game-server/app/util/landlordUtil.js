@@ -590,3 +590,33 @@ landlord.playPoker = function (playPokers, handPokers) {
 
     return result;
 };
+
+/**
+ * 两张扑克牌是否相同 (点数 和 花色 都相同)
+ * @param poker1
+ * @param poker2
+ * @return {boolean}
+ */
+landlord.isSamePoker = function (poker1, poker2) {
+    return poker1.point === poker2.point && poker1.type === poker2.type;
+};
+
+/**
+ * 打出的牌是否在 手牌中
+ *
+ * @param playPokers {Array} 打出去的牌
+ * @param handPokers {Array} 手牌
+ *
+ * @return {Boolean}
+ */
+landlord.isPlayPokersInHand = function (playPokers, handPokers) {
+
+    return playPokers.every((poker) => {
+        for (let i = 0; i < handPokers.length; i++) {
+            if (landlord.isSamePoker(poker, handPokers[i])) {
+                return true;
+            }
+        }
+        return false;
+    });
+};
